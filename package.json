@@ -1,0 +1,22 @@
+{
+  "name": "mephisto",
+  "version": "1.0.0",
+  "description": "chatbot+",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DanielGodfrey-Dev/Mephisto.git"
+  },
+  "keywords": [
+    "chatbot"
+  ],
+  "author": "DanielGodfrey-Dev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DanielGodfrey-Dev/Mephisto/issues"
+  },
+  "homepage": "https://github.com/DanielGodfrey-Dev/Mephisto#readme"
+}
