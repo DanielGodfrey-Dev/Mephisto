@@ -1,0 +1,13 @@
+@font-face {
+    font-family: Anurati;
+    src: url('Anurati-Regular.woff');
+}
+
+body {
+    background: url('https://wallpapercave.com/wp/wp3700647.jpg') no-repeat center fixed;
+    background-size: cover;
+    
+    font-family: Anurati;
+    font-size: 70px;
+    color: whitesmoke;
+}

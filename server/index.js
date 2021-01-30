@@ -4,10 +4,8 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const port = 3000;
 
-app.get('/', (req, res) => {
-    res.send('we exist in this cyberspace.');
-})
+app.use(express.static(__dirname + '/../dist'));
 
 app.listen(port, () => {
-    console.log(`Mephisto is aware on localhost port ${port}`);
+    console.log(`Mephisto is alive on localhost port ${port}`);
 })
