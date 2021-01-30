@@ -83,6 +83,7 @@ typings/
 
 # Webpack bundle
 dist/bundle.js
+dist/bundle.js.LICENSE.txt
 
 # Gatsby files
 .cache/
