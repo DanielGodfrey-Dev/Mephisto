@@ -1,10 +1,15 @@
 import React from 'react';
 import axios from 'axios';
 
+import ChatBar from './ChatBar.jsx';
+
 class App extends React.Component {
     render() {
         return  (
-            <h1>MEPHISTO IS HERE</h1>
+            <div>
+                <h1 className="glitch" data-trick="MEPHISTO">MEPHISTO</h1>
+                <ChatBar />
+            </div>
         )
     }
 }
