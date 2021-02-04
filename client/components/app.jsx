@@ -9,10 +9,17 @@ class App extends React.Component {
         this.state = {
             userInput: ''
         }
+
+        this.userInput = this.userInput.bind(this);
+        this.inputReset = this.inputReset.bind(this);
     }
 
-    userInput(e) {
-        this.setState(this.state.userInput + e);
+    userInput(input) {
+        this.setState({userInput: input});
+    }
+
+    inputReset() {
+        this.setState({userInput: ''});
     }
 
     componentDidMount() {
@@ -23,8 +30,11 @@ class App extends React.Component {
     render() {
         return  (
             <div>
-                <h1 className="glitch" data-trick="MEPHISTO">MEPHISTO</h1>
-                <ChatBar userInput={this.userInput} />
+                <div>
+                    <h1 className="glitch" data-trick="MEPHISTO">MEPHISTO</h1>
+                    <ChatBar userInput={this.userInput} inputReset={this.inputReset} />
+                </div>
+                <div style={{fontSize: 13}}>WE ARE HERE {this.state.userInput}</div>
             </div>
         )
     }

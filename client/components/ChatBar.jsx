@@ -30,18 +30,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //component anatomy_________________________________
-export default function ChatBar( {userInput} ) {
+export default function ChatBar( {userInput, inputReset} ) {
   const classes = useStyles();
 
     function handleSubmit(e) {
       e.preventDefault();
       e.target.reset();
+      inputReset();
       console.log('The text was submitted.');
     }
 
     function handleChange(e) {
       e.preventDefault();
-      console.log(e.target.value);
+      let phrase = e.target.value;
+      let letter = phrase.slice(phrase.lenght - 1, phrase.length)
+      userInput(letter);
     }
 
   return (
