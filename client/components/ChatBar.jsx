@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import { Input } from '@material-ui/core';
 
 //style definitions for component________________
 const useStyles = makeStyles((theme) => ({
@@ -29,32 +30,48 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //component anatomy_________________________________
-export default function ChatBar() {
+export default function ChatBar( {userInput} ) {
   const classes = useStyles();
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      e.target.reset();
+      console.log('The text was submitted.');
+    }
+
+    function handleChange(e) {
+      e.preventDefault();
+      console.log(e.target.value);
+    }
 
   return (
     <div className={classes.root}>
       <div>
-        <TextField
-          id="outlined-full-width"
-          label="Communicate"
-          style={{ margin: 13 }}
-          placeholder="your message to Mephisto..."
-          helperText="Choose your words...wisely."
-          fullWidth
-          margin="normal"
-          InputLabelProps={{
-            shrink: true,
-            className: classes.label
-          }}
-          InputProps={{
-            className: classes.textField
-          }}
-          FormHelperTextProps={{
-            className: classes.helper
-          }}
-          variant="outlined"
-        />
+        <form id="mainTextField" onSubmit={handleSubmit}>
+          <TextField
+            id="outlined-full-width"
+            label="Communicate"
+            style={{ margin: 13 }}
+            placeholder="your message to Mephisto..."
+            helperText="Choose your words...wisely."
+            fullWidth
+            margin="normal"
+
+            onChange={handleChange}
+
+            InputLabelProps={{
+              shrink: true,
+              className: classes.label
+            }}
+            InputProps={{
+              className: classes.textField
+            }}
+            FormHelperTextProps={{
+              className: classes.helper
+            }}
+            variant="outlined"
+          />
+        </form>
       </div>
     </div>
   );
