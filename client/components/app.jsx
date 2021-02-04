@@ -7,7 +7,8 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            userInput: ''
+            userInput: '',
+            ascii: 0
         }
 
         this.userInput = this.userInput.bind(this);
@@ -15,14 +16,22 @@ class App extends React.Component {
     }
 
     userInput(input) {
-        this.setState({userInput: input});
+        let ascii = input.charCodeAt(0).toString(2);
+        this.setState({
+            userInput: input,
+            ascii: this.state.ascii + ascii
+        });
     }
 
     inputReset() {
-        this.setState({userInput: ''});
+        this.setState({
+            userInput: '',
+            ascii: 0
+        });
     }
 
     componentDidMount() {
+        //need intro screen here (modal)
 
     }
 
@@ -34,7 +43,12 @@ class App extends React.Component {
                     <h1 className="glitch" data-trick="MEPHISTO">MEPHISTO</h1>
                     <ChatBar userInput={this.userInput} inputReset={this.inputReset} />
                 </div>
-                <div style={{fontSize: 13}}>WE ARE HERE {this.state.userInput}</div>
+                {this.state.userInput &&
+                    <div style={{fontSize: 13, overflowWrap: 'break-word', marginRight: 100}}>
+                        PROCESSING &sum; &nbsp;
+                        {this.state.ascii}
+                    </div>
+                }
             </div>
         )
     }
