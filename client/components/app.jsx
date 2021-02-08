@@ -8,12 +8,21 @@ class App extends React.Component {
         super(props);
         this.state = {
             userInput: '',
-            ascii: 0
+            ascii: 0,
+            response: ''
         }
-
+        
         this.userInput = this.userInput.bind(this);
+        this.userInputSubmit = this.userInputSubmit.bind(this);
         this.inputReset = this.inputReset.bind(this);
     }
+    
+//____________________________________________________________________
+    componentDidMount() {
+        //need intro screen here (modal)
+
+    }
+//____________________________________________________________________
 
     userInput(input) {
         let ascii = input.charCodeAt(0).toString(2);
@@ -23,32 +32,53 @@ class App extends React.Component {
         });
     }
 
+    userInputSubmit(submission) {
+        axios.post('/submit', {
+            userText: submission,
+            punctuation: submission[submission.length - 1]
+          })
+          .then((response) => {
+            this.setState({ response: response.data })
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    }
+
     inputReset() {
         this.setState({
             userInput: '',
-            ascii: 0
+            ascii: 0,
+            response: ''
         });
     }
 
-    componentDidMount() {
-        //need intro screen here (modal)
-
-    }
-
+//____________________________________________________________________
 
     render() {
         return  (
             <div>
                 <div>
-                    <h1 className="glitch" data-trick="MEPHISTO">MEPHISTO</h1>
-                    <ChatBar userInput={this.userInput} inputReset={this.inputReset} />
+                    <h1 className="glitch" data-trick="MEPHISTO" style={{marginBottom: -3}}>MEPHISTO</h1>
+                    <ChatBar text={this.state.userInput} userInput={this.userInput} inputReset={this.inputReset} userInputSubmit={this.userInputSubmit} />
                 </div>
-                {this.state.userInput &&
-                    <div style={{fontSize: 13, overflowWrap: 'break-word', marginRight: 100}}>
-                        PROCESSING &sum; &nbsp;
-                        {this.state.ascii}
-                    </div>
-                }
+
+                <div>
+                    {this.state.userInput &&
+                        <div style={{fontSize: 13, overflowWrap: 'break-word', marginRight: 100}}>
+                            PROCESSING &sum; &nbsp;
+                            {this.state.ascii}
+                        </div>
+                    }
+                </div>
+
+                <div>
+                    {this.state.response &&
+                        <div style={{marginTop: 20}}>
+                            {this.state.response}
+                        </div>
+                    }
+                </div>
             </div>
         )
     }
