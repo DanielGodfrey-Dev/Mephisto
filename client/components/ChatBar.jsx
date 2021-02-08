@@ -30,11 +30,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //component anatomy_________________________________
-export default function ChatBar( {userInput, inputReset} ) {
+export default function ChatBar( {text, userInput, inputReset, userInputSubmit} ) {
   const classes = useStyles();
 
     function handleSubmit(e) {
       e.preventDefault();
+      userInputSubmit(text);
       e.target.reset();
       inputReset();
       console.log('The text was submitted.');
