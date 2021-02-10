@@ -56,16 +56,36 @@ class App extends React.Component {
 //____________________________________________________________________
 
     render() {
+        const cosmeticProcessingStyle = {
+            fontSize: 13, 
+            overflowWrap: 'break-word', 
+            marginRight: 100
+        }
+
+        const chatResponseStyle = {
+            fontFamily: 'Orbitron', 
+            fontSize: 29, 
+            textAlign: 'center', 
+            marginTop: 50, 
+            marginRight: 200, 
+            marginLeft: 100
+        }
+
         return  (
             <div>
                 <div>
                     <h1 className="glitch" data-trick="MEPHISTO" style={{marginBottom: -3}}>MEPHISTO</h1>
-                    <ChatBar text={this.state.userInput} userInput={this.userInput} inputReset={this.inputReset} userInputSubmit={this.userInputSubmit} />
+                    <ChatBar 
+                        text={this.state.userInput}
+                        userInput={this.userInput}
+                        inputReset={this.inputReset}
+                        userInputSubmit={this.userInputSubmit}
+                    />
                 </div>
 
                 <div>
                     {this.state.userInput &&
-                        <div style={{fontSize: 13, overflowWrap: 'break-word', marginRight: 100}}>
+                        <div style={cosmeticProcessingStyle}>
                             PROCESSING &sum; &nbsp;
                             {this.state.ascii}
                         </div>
@@ -74,7 +94,7 @@ class App extends React.Component {
 
                 <div>
                     {this.state.response &&
-                        <div style={{marginTop: 20}}>
+                        <div style={chatResponseStyle}>
                             {this.state.response}
                         </div>
                     }

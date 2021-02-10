@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
+const chatLogic = require('./chatLogic/basic.js')
 const port = 3000;
 
 //______________________________________________________________
@@ -13,6 +14,4 @@ app.listen(port, () => {
 })
 //______________________________________________________________
 
-app.post('/submit', (req, res) => {
-    res.send(req.body.userText);
-})
+app.post('/submit', chatLogic.randomResponse);
