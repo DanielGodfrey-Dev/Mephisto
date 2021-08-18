@@ -33,12 +33,12 @@ class App extends React.Component {
     }
 
     userInputSubmit(submission) {
-        axios.post('/submit', {
+        axios.post('/search', {
             userText: submission,
             punctuation: submission[submission.length - 1]
           })
           .then((response) => {
-            this.setState({ response: response.data })
+            console.log(response.data);
           })
           .catch((error) => {
             console.log(error);
