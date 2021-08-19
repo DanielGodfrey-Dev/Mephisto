@@ -56,8 +56,8 @@ export default function ChatBar( {text, userInput, inputReset, userInputSubmit} 
             id="outlined-full-width"
             label="Communicate"
             style={{ margin: 13 }}
-            placeholder="your message to Mephisto..."
-            helperText="Choose your words...wisely."
+            placeholder="Search the CyberWeb Mainframe"
+            helperText="data input"
             fullWidth
             margin="normal"
 

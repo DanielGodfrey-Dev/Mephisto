@@ -34,8 +34,7 @@ class App extends React.Component {
 
     userInputSubmit(submission) {
         axios.post('/search', {
-            userText: submission,
-            punctuation: submission[submission.length - 1]
+            userText: submission
           })
           .then((response) => {
             console.log(response.data);
