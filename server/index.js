@@ -1,10 +1,7 @@
 const express = require('express');
 const app = express();
-const path = require('path');
-const http = require('http');
 const https = require('https');
 const GoogleAPI = require('../google.js');
-const { send } = require('process');
 const port = 3001;
 
 //______________________________________________________________
@@ -19,7 +16,6 @@ app.listen(port, () => {
 })
 //______________________________________________________________
 
-// app.post('/submit', chatLogic.randomResponse);
 app.post('/search', (req, res) => {
     let searchTerm = req.body.userText;
     let API_KEY = GoogleAPI.GoogleAPI;
@@ -27,18 +23,34 @@ app.post('/search', (req, res) => {
 
     let url = `https://www.googleapis.com/customsearch/v1?key=${API_KEY}&cx=${CONTEXT_KEY}&q=${searchTerm}`;
 
-    https.get(`${url}`, (res) => {
-    console.log('statusCode:', res.statusCode);
-    console.log('headers:', res.headers);
+    let GoogleData = '';
+    let FinalData = [];
 
-    res.on('data', (d) => {
-        console.log('we are here');
-        process.stdout.write(d);
+    https.get(`${url}`, (response) => {
+        console.log('statusCode:', response.statusCode);
+        console.log('headers:', response.headers);
+
+        response.on('data', (d) => {
+            GoogleData += d;
+        });
+
+        response.on('end', function() {
+            let parsed = JSON.parse(GoogleData);
+            for (var i = 0; i < parsed.items.length; i++) {
+                var item = parsed.items[i];
+                console.log(item);
+                FinalData.push(item);
+              }
+
+            console.log('sending data');
+            res.send(FinalData);
+            
+        })
+        .on('error', (e) => {
+            console.error(e);
+        });
+
+
+
     });
-
-    }).on('error', (e) => {
-    console.error(e);
-    });
-
-    res.send('data retrieved')
-})
+});
