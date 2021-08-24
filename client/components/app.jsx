@@ -9,7 +9,7 @@ class App extends React.Component {
         this.state = {
             userInput: '',
             ascii: 0,
-            response: ''
+            data: []
         }
         
         this.userInput = this.userInput.bind(this);
@@ -37,7 +37,8 @@ class App extends React.Component {
             userText: submission
           })
           .then((response) => {
-            console.log(response.data);
+            this.setState({ data: response})
+            console.log(this.state.data);
           })
           .catch((error) => {
             console.log(error);
@@ -54,17 +55,29 @@ class App extends React.Component {
 
 //____________________________________________________________________
 
+    randomizeLinks() {
+        // let dataArray = this.state.data.data;
+        // let link1 = Math.floor(Math.random() * 10) + 1;
+        // let displayLink1 = dataArray.splice(link1, 1);
+        // let link2 = Math.floor(Math.random() * 10);
+
+    }
+//____________________________________________________________________
+
+//____________________________________________________________________
+
     render() {
         const cosmeticProcessingStyle = {
             fontSize: 13, 
             overflowWrap: 'break-word', 
-            marginRight: 100
+            marginRight: 100,
+            marginBottom: 50
         }
 
         const chatResponseStyle = {
             fontFamily: 'Orbitron', 
-            fontSize: 29, 
-            textAlign: 'center', 
+            fontSize: 30, 
+            textAlign: 'left', 
             marginTop: 50, 
             marginRight: 200, 
             marginLeft: 100
@@ -92,10 +105,26 @@ class App extends React.Component {
                 </div>
 
                 <div>
-                    {this.state.response &&
-                        <div style={chatResponseStyle}>
-                            {this.state.response}
+                    {this.state.data.data ? 
+                    <div>
+                        <div style={{fontSize: 12, marginBottom: '50px'}} style={chatResponseStyle}>
+                            {this.state.data.data[0]["title"]}
+                            <div style={{color: 'green'}}>{this.state.data.data[0]["snippet"]}</div>
+                            <div>{this.state.data.data[0]["link"]}</div>
                         </div>
+                        <div></div>
+                        <div style={{fontSize: 12, marginBottom: '50px'}} style={chatResponseStyle}>
+                            {this.state.data.data[1]["title"]}
+                            <div style={{color: 'green'}}>{this.state.data.data[1]["snippet"]}</div>
+                            <div>{this.state.data.data[1]["link"]}</div>
+                        </div>
+                        <div></div>
+                        <div style={{fontSize: 12, marginBottom: '50px'}} style={chatResponseStyle}>
+                             {this.state.data.data[2]["title"]}
+                            <div style={{color: 'green'}}>{this.state.data.data[2]["snippet"]}</div>
+                            <div>{this.state.data.data[2]["link"]}</div>
+                        </div>
+                    </div> : <div style={{fontSize: 12}}>Waiting for Data</div>
                     }
                 </div>
             </div>
