@@ -64,14 +64,14 @@ class App extends React.Component {
             fontSize: 13, 
             overflowWrap: 'break-word', 
             marginRight: 100,
-            marginBottom: 50
+            marginBottom: 20
         }
 
         const chatResponseStyle = {
             fontFamily: 'Orbitron', 
             fontSize: 30, 
             textAlign: 'left', 
-            marginTop: 50, 
+            marginTop: 20, 
             marginRight: 200, 
             marginLeft: 100
         }
