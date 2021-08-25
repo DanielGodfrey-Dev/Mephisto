@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import DisplayLink from './DisplayLink.jsx';
 
 import ChatBar from './ChatBar.jsx';
 
@@ -106,25 +107,11 @@ class App extends React.Component {
 
                 <div>
                     {this.state.data.data ? 
-                    <div>
-                        <div style={{fontSize: 12, marginBottom: '50px'}} style={chatResponseStyle}>
-                            {this.state.data.data[0]["title"]}
-                            <div style={{color: 'green'}}>{this.state.data.data[0]["snippet"]}</div>
-                            <div>{this.state.data.data[0]["link"]}</div>
-                        </div>
-                        <div></div>
-                        <div style={{fontSize: 12, marginBottom: '50px'}} style={chatResponseStyle}>
-                            {this.state.data.data[1]["title"]}
-                            <div style={{color: 'green'}}>{this.state.data.data[1]["snippet"]}</div>
-                            <div>{this.state.data.data[1]["link"]}</div>
-                        </div>
-                        <div></div>
-                        <div style={{fontSize: 12, marginBottom: '50px'}} style={chatResponseStyle}>
-                             {this.state.data.data[2]["title"]}
-                            <div style={{color: 'green'}}>{this.state.data.data[2]["snippet"]}</div>
-                            <div>{this.state.data.data[2]["link"]}</div>
-                        </div>
-                    </div> : <div style={{fontSize: 12}}>Waiting for Data</div>
+                    <div style={chatResponseStyle}>
+                        <DisplayLink data = {this.state.data.data}/>
+                        <DisplayLink data = {this.state.data.data}/>
+                        <DisplayLink data = {this.state.data.data}/>
+                    </div> : <div style={{fontSize: '0.7em'}}>Waiting for Data</div>
                     }
                 </div>
             </div>
