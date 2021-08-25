@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { Input } from '@material-ui/core';
 
 //style definitions for component________________
 const useStyles = makeStyles((theme) => ({
@@ -36,8 +35,6 @@ export default function ChatBar( {text, userInput, inputReset, userInputSubmit} 
     function handleSubmit(e) {
       e.preventDefault();
       userInputSubmit(text);
-      e.target.reset();
-      inputReset();
       console.log('The text was submitted.');
     }
 

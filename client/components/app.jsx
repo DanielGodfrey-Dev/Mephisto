@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import DisplayLink from './DisplayLink.jsx';
 
 import ChatBar from './ChatBar.jsx';
 
@@ -9,12 +10,13 @@ class App extends React.Component {
         this.state = {
             userInput: '',
             ascii: 0,
-            data: []
+            firstLink: {},
+            secondLink: {},
+            thirdLink: {}
         }
         
         this.userInput = this.userInput.bind(this);
         this.userInputSubmit = this.userInputSubmit.bind(this);
-        this.inputReset = this.inputReset.bind(this);
     }
     
 //____________________________________________________________________
@@ -37,32 +39,23 @@ class App extends React.Component {
             userText: submission
           })
           .then((response) => {
-            this.setState({ data: response})
-            console.log(this.state.data);
+            
+            let link1 = 0;
+            let link2 = Math.floor(1 + Math.random() * 8);
+            let link3 = Math.floor(1 + Math.random() * 7);
+
+
+            this.setState({ 
+            firstLink: response.data[link1],
+            secondLink: response.data[link2],
+            thirdLink: response.data[link3]
+            })
           })
           .catch((error) => {
             console.log(error);
           });
     }
 
-    inputReset() {
-        this.setState({
-            userInput: '',
-            ascii: 0,
-            response: ''
-        });
-    }
-
-//____________________________________________________________________
-
-    randomizeLinks() {
-        // let dataArray = this.state.data.data;
-        // let link1 = Math.floor(Math.random() * 10) + 1;
-        // let displayLink1 = dataArray.splice(link1, 1);
-        // let link2 = Math.floor(Math.random() * 10);
-
-    }
-//____________________________________________________________________
 
 //____________________________________________________________________
 
@@ -71,14 +64,14 @@ class App extends React.Component {
             fontSize: 13, 
             overflowWrap: 'break-word', 
             marginRight: 100,
-            marginBottom: 50
+            marginBottom: 20
         }
 
         const chatResponseStyle = {
             fontFamily: 'Orbitron', 
             fontSize: 30, 
             textAlign: 'left', 
-            marginTop: 50, 
+            marginTop: 20, 
             marginRight: 200, 
             marginLeft: 100
         }
@@ -105,26 +98,12 @@ class App extends React.Component {
                 </div>
 
                 <div>
-                    {this.state.data.data ? 
-                    <div>
-                        <div style={{fontSize: 12, marginBottom: '50px'}} style={chatResponseStyle}>
-                            {this.state.data.data[0]["title"]}
-                            <div style={{color: 'green'}}>{this.state.data.data[0]["snippet"]}</div>
-                            <div>{this.state.data.data[0]["link"]}</div>
-                        </div>
-                        <div></div>
-                        <div style={{fontSize: 12, marginBottom: '50px'}} style={chatResponseStyle}>
-                            {this.state.data.data[1]["title"]}
-                            <div style={{color: 'green'}}>{this.state.data.data[1]["snippet"]}</div>
-                            <div>{this.state.data.data[1]["link"]}</div>
-                        </div>
-                        <div></div>
-                        <div style={{fontSize: 12, marginBottom: '50px'}} style={chatResponseStyle}>
-                             {this.state.data.data[2]["title"]}
-                            <div style={{color: 'green'}}>{this.state.data.data[2]["snippet"]}</div>
-                            <div>{this.state.data.data[2]["link"]}</div>
-                        </div>
-                    </div> : <div style={{fontSize: 12}}>Waiting for Data</div>
+                    {(this.state.thirdLink) ?
+                    <div style={chatResponseStyle}>
+                        <DisplayLink link = {this.state.firstLink} />
+                        <DisplayLink link = {this.state.secondLink} />
+                        <DisplayLink link = {this.state.thirdLink} />
+                    </div> : <div style={{fontSize: '0.7em'}}>Waiting for Data</div>
                     }
                 </div>
             </div>
