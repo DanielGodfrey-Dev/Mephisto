@@ -58,6 +58,7 @@ body {
     /* background: url('https://wallpapercave.com/wp/wp3700647.jpg') no-repeat center fixed; */
     background: black;
     background-size: cover;
+    flex: auto;
 
     height: 100vh;
     width: 100vw;
