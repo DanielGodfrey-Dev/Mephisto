@@ -10,12 +10,13 @@ class App extends React.Component {
         this.state = {
             userInput: '',
             ascii: 0,
-            data: []
+            firstLink: {},
+            secondLink: {},
+            thirdLink: {}
         }
         
         this.userInput = this.userInput.bind(this);
         this.userInputSubmit = this.userInputSubmit.bind(this);
-        this.inputReset = this.inputReset.bind(this);
     }
     
 //____________________________________________________________________
@@ -38,32 +39,23 @@ class App extends React.Component {
             userText: submission
           })
           .then((response) => {
-            this.setState({ data: response})
-            console.log(this.state.data);
+            
+            let link1 = 0;
+            let link2 = Math.floor(1 + Math.random() * 8);
+            let link3 = Math.floor(1 + Math.random() * 7);
+
+
+            this.setState({ 
+            firstLink: response.data[link1],
+            secondLink: response.data[link2],
+            thirdLink: response.data[link3]
+            })
           })
           .catch((error) => {
             console.log(error);
           });
     }
 
-    inputReset() {
-        this.setState({
-            userInput: '',
-            ascii: 0,
-            response: ''
-        });
-    }
-
-//____________________________________________________________________
-
-    randomizeLinks() {
-        // let dataArray = this.state.data.data;
-        // let link1 = Math.floor(Math.random() * 10) + 1;
-        // let displayLink1 = dataArray.splice(link1, 1);
-        // let link2 = Math.floor(Math.random() * 10);
-
-    }
-//____________________________________________________________________
 
 //____________________________________________________________________
 
@@ -106,11 +98,11 @@ class App extends React.Component {
                 </div>
 
                 <div>
-                    {this.state.data.data ? 
+                    {(this.state.thirdLink) ?
                     <div style={chatResponseStyle}>
-                        <DisplayLink data = {this.state.data.data}/>
-                        <DisplayLink data = {this.state.data.data}/>
-                        <DisplayLink data = {this.state.data.data}/>
+                        <DisplayLink link = {this.state.firstLink} />
+                        <DisplayLink link = {this.state.secondLink} />
+                        <DisplayLink link = {this.state.thirdLink} />
                     </div> : <div style={{fontSize: '0.7em'}}>Waiting for Data</div>
                     }
                 </div>

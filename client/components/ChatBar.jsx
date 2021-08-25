@@ -35,8 +35,6 @@ export default function ChatBar( {text, userInput, inputReset, userInputSubmit} 
     function handleSubmit(e) {
       e.preventDefault();
       userInputSubmit(text);
-      e.target.reset();
-      inputReset();
       console.log('The text was submitted.');
     }
 
