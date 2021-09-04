@@ -1,11 +1,11 @@
 import React from 'react';
-
+import styles from './DisplayLink.css';
 
 export default function DisplayLink ({ link }) {
-    console.log(link);
+
     return (
         <div>
-            <div>
+            <div className={styles.fullerButtonBlue}>
                 <a href={link["link"]} style={{
                     width: "0px", 
                     height: "0px", 
@@ -14,7 +14,8 @@ export default function DisplayLink ({ link }) {
                     borderTop: "40px solid #d1e8ff",
                     marginBottom: "3px",
                     display: "inline-block",
-                    verticalAlign: "middle"}}>
+                    verticalAlign: "middle"
+                    }}>
                 </a>
         </div>
         <div style={{fontSize: '1em', marginBottom: '50px'}} >

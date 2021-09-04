@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import DisplayLink from './DisplayLink.jsx';
+import Explanation from './Explanation.jsx';
 
 import ChatBar from './ChatBar.jsx';
 
@@ -76,10 +77,20 @@ class App extends React.Component {
             marginLeft: 100
         }
 
+        const explanationStyle = {
+            float: 'right',
+            marginRight: '300px'
+        }
+
         return  (
             <div>
                 <div>
-                    <h1 className="glitch" data-trick="MEPHISTO" style={{marginBottom: -3}}>MEPHISTO</h1>
+                    <div>
+                        <h1 className="glitch" data-trick="MEPHISTO" style={{marginBottom: -3}}>MEPHISTO</h1>
+                        <div style={explanationStyle}>
+                            <Explanation />
+                        </div>
+                    </div>
                     <ChatBar 
                         text={this.state.userInput}
                         userInput={this.userInput}
