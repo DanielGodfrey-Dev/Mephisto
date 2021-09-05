@@ -20,7 +20,7 @@ export default function DisplayLink ({ link }) {
         </div>
         <div style={{fontSize: '1em', marginBottom: '50px'}} >
             {link["title"]}
-            <div style={{color: 'green'}}>{link["snippet"]}</div>
+            <div style={{color: '#14F67D'}}>{link["snippet"]}</div>
         </div>
         </div>
     )

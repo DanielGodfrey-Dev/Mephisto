@@ -86,10 +86,10 @@ class App extends React.Component {
             <div>
                 <div>
                     <div>
-                        <h1 className="glitch" data-trick="MEPHISTO" style={{marginBottom: -3}}>MEPHISTO</h1>
                         <div style={explanationStyle}>
                             <Explanation />
                         </div>
+                        <h1 className="glitch" data-trick="MEPHISTO" style={{marginBottom: -3}}>MEPHISTO</h1>
                     </div>
                     <ChatBar 
                         text={this.state.userInput}

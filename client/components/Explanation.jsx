@@ -14,7 +14,7 @@ function getModalStyle() {
   return {
     top: `${top}%`,
     left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
+    transform: `translate(-${top}%, -${left}%)`
   };
 }
 
@@ -48,22 +48,47 @@ export default function SimpleModal() {
   const body = (
     <div style={modalStyle} className={classes.paper}>
       <h2 id="simple-modal-title">CyberWeb Mainframe Usage</h2>
+      <br></br>
       <p id="simple-modal-description">
         Mephisto is a simple cyberpunk-style search engine.
+      </p>
+      <br></br>
+      <p>
         It will perform a search and return the best results possible. If new results are desired for the 2nd
         and 3rd link, please re-run the search.
-        No data is kept except anonymouse search terms from all users for future potential fun usage.
-
-        Click the triangle to access the links.
-
-        Hack the Planet.
+        No data is kept except anonymous search terms from all users for future potential fun usage.
       </p>
+      <br></br>
+      <p>
+        Click the triangle to access the links.
+      </p>
+      <br></br>
+        Hack the Planet.
     </div>
   );
 
   return (
     <div>
-      <button type="button" onClick={handleOpen} className={styles.fullerButtonBlue}>
+      <button 
+        type="button"
+        onClick={handleOpen} 
+        className={styles.fullerButtonPurple}
+        style = {{
+          color: 'white',
+          background: 'none',
+          borderRadius: '0',
+          padding: '0.9em 4em',
+          letterSpacing: '0.35em',
+          fontSize: '15px',
+          webkitTransition: 'background-color 0.3s, box-shadow 0.3s, color 0.3s',
+          transition: 'background-color 0.3s, box-shadow 0.3s, color 0.3s',
+          boxShadow: 'inset 0 0 1em rgba(0, 170, 170, 0.5), 0 0 1em rgba(0, 170, 170, 0.5)',
+          border: '#F414ED solid 2px',
+          width: '15em',
+          backgroundColor: '#F414ED',
+          boxShadow: 'inset 0 0 0 rgba(0, 170, 170, 0.5), 0 0 1.5em rgba(0, 170, 170, 0.7)'
+        }}
+      >
         Mephisto Explanation
       </button>
       <Modal
