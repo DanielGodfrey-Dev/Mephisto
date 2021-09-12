@@ -1,10 +1,30 @@
 const express = require('express');
 const app = express();
+  
 const https = require('https');
 const GoogleAPI = require('../google.js');
 const port = 3001;
 
+const { graphqlHTTP } = require('express-graphql');
+const { buildSchema } = require('graphql');
+
+const schema = buildSchema(`
+  type Query {
+    hello: String
+  }
+`);
+
+const root = { hello: () => 'Hello world!' };
+
+
+
 //______________________________________________________________
+app.use('/graphql', graphqlHTTP({
+    schema: schema,
+    rootValue: root,
+    graphiql: true,
+  }));
+  
 app.use(express.static(__dirname + '/../dist'));
 app.use(express.json());
 app.use(express.urlencoded({
