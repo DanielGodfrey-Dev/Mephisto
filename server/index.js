@@ -10,21 +10,19 @@ const { buildSchema } = require('graphql');
 
 const schema = buildSchema(`
   type Query {
-    hello: String
+    friend: String
   }
 `);
 
-const root = { hello: () => 'Hello world!' };
-
-
+const friend = { friend: () => 'Hello Shawna' };
 
 //______________________________________________________________
 app.use('/graphql', graphqlHTTP({
     schema: schema,
-    rootValue: root,
+    rootValue: friend,
     graphiql: true,
   }));
-  
+
 app.use(express.static(__dirname + '/../dist'));
 app.use(express.json());
 app.use(express.urlencoded({
