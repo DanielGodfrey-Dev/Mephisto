@@ -18,6 +18,7 @@ class App extends React.Component {
         
         this.userInput = this.userInput.bind(this);
         this.userInputSubmit = this.userInputSubmit.bind(this);
+        this.chat = this.chat.bind(this);
     }
     
 //____________________________________________________________________
@@ -34,6 +35,11 @@ class App extends React.Component {
             ascii: this.state.ascii + ascii
         });
     }
+
+    chat() {
+        console.log(this.state.userInput);
+    }
+
 
     userInputSubmit(submission) {
         axios.post('/search', {
@@ -94,7 +100,6 @@ class App extends React.Component {
                     <ChatBar 
                         text={this.state.userInput}
                         userInput={this.userInput}
-                        inputReset={this.inputReset}
                         userInputSubmit={this.userInputSubmit}
                     />
                 </div>
@@ -106,6 +111,27 @@ class App extends React.Component {
                             {this.state.ascii}
                         </div>
                     }
+                </div>
+
+                <div>
+                    <button onClick={this.chat}
+                    style = {{
+                                float: 'right',
+                                marginRight: '300px',
+                                color: 'white',
+                                background: 'none',
+                                borderRadius: '0',
+                                letterSpacing: '0.35em',
+                                fontSize: '15px',
+                                webkitTransition: 'background-color 0.3s, box-shadow 0.3s, color 0.3s',
+                                transition: 'background-color 0.3s, box-shadow 0.3s, color 0.3s',
+                                boxShadow: 'inset 0 0 1em rgba(0, 170, 170, 0.5), 0 0 1em rgba(0, 170, 170, 0.5)',
+                                border: 'gold solid 2px',
+                                width: '15em',
+                                backgroundColor: 'gold',
+                                boxShadow: 'inset 0 0 0 rgba(0, 170, 170, 0.5), 0 0 1.5em rgba(0, 170, 170, 0.7)'
+
+                    }}>Chat with Mephisto</button>
                 </div>
 
                 <div>
