@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
   
+const http = require('https');
 const https = require('https');
 const GoogleAPI = require('../google.js');
 const port = 3001;
@@ -67,10 +68,69 @@ app.post('/search', (req, res) => {
     });
 });
 
+
+//using WordsAPI_______________________________________________________________________
+
+//______________________________________________________________________________________
+
+function wordFilter(array) {
+  let nounArray = [];
+  let verbArray = [];
+
+  function wordTypeCheck(word) {
+
+    const options = {
+      method: 'GET',
+      hostname: 'wordsapiv1.p.rapidapi.com',
+      port: null,
+      path: `/words/${word}/definitions`,
+      headers: {
+        'X-RapidAPI-Key': '6a533ffb67mshbbba35fac1f001bp170518jsn1e72d2ed959c',
+        'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
+      }
+    };
+
+    const req = http.request(options, function (res) {
+      const chunks = [];
+
+      res.on('data', function (chunk) {
+        chunks.push(chunk);
+      });
+
+      res.on('end', function () {
+        const body = Buffer.concat(chunks);
+        let parsed = JSON.parse(body);
+        let wordType = parsed["definitions"][0]["partOfSpeech"];
+        console.log(wordType);
+        if (wordType === 'noun') {
+          nounArray.push(word)
+        }
+        else if (wordType === 'verb') {
+          verbArray.push(word);
+        }
+      });
+    });
+    req.end();
+}
+  for (i = 0; i < array.length; i++) {
+    wordTypeCheck(array[i]);
+  }
+
+  setTimeout(() => {
+    console.log(nounArray, verbArray);
+  }, 3000);
+
+}
+
+
 app.post('/chat', (req, res) => {
   let searchTerm = req.body.userText;
   let API_KEY = GoogleAPI.GoogleAPI;
   let CONTEXT_KEY = GoogleAPI.ContextKey;
+
+  let wordArray = searchTerm.split(" ");
+  console.log(wordArray);
+  wordFilter(wordArray);
 
   let url = `https://www.googleapis.com/customsearch/v1?key=${API_KEY}&cx=${CONTEXT_KEY}&q=${searchTerm}`;
 

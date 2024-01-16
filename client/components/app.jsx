@@ -39,27 +39,6 @@ class App extends React.Component {
         });
     }
 
-    chat() {
-        let submission = this.state.userInput;
-        axios.post('/chat', {
-            userText: submission
-          })
-          .then((response) => {
-
-            console.log(response.data);
-            if (response.data > this.state.chatResponseScore) {
-                this.setState({
-                    chatResponse: response.data
-                })
-             }
-
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-    }
-
-
     userInputSubmit(submission) {
         axios.post('/search', {
             userText: submission
@@ -76,6 +55,26 @@ class App extends React.Component {
             secondLink: response.data[link2],
             thirdLink: response.data[link3]
             })
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    }
+
+    chat() {
+        let submission = this.state.userInput;
+        axios.post('/chat', {
+            userText: submission
+          })
+          .then((response) => {
+
+            console.log(response.data);
+            if (response.data > this.state.chatResponseScore) {
+                this.setState({
+                    chatResponse: response.data
+                })
+             }
+
           })
           .catch((error) => {
             console.log(error);
