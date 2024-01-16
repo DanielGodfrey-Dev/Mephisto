@@ -13,7 +13,9 @@ class App extends React.Component {
             ascii: 0,
             firstLink: {},
             secondLink: {},
-            thirdLink: {}
+            thirdLink: {},
+
+            D4V1D: false
         }
         
         this.userInput = this.userInput.bind(this);
@@ -84,20 +86,36 @@ class App extends React.Component {
 
         return  (
             <div>
+                {(this.state.D4V1D) ?
                 <div>
                     <div>
-                        <div style={explanationStyle}>
-                            <Explanation />
+                        <div>
+                            <h1 className="glitch" data-trick="D4V1D" style={{marginBottom: -3}}>D4V1D</h1>
                         </div>
-                        <h1 className="glitch" data-trick="MEPHISTO" style={{marginBottom: -3}}>MEPHISTO</h1>
+                        <ChatBar 
+                            text={this.state.userInput}
+                            userInput={this.userInput}
+                            inputReset={this.inputReset}
+                            userInputSubmit={this.userInputSubmit}
+                        />
+                     </div> 
+                </div> :
+                <div>
+                    <div>
+                        <div>
+                            <div style={explanationStyle}>
+                                <Explanation />
+                            </div>
+                            <h1 className="glitch" data-trick="MEPHISTO" style={{marginBottom: -3}}>MEPHISTO</h1>
+                        </div>
+                        <ChatBar 
+                            text={this.state.userInput}
+                            userInput={this.userInput}
+                            inputReset={this.inputReset}
+                            userInputSubmit={this.userInputSubmit}
+                        />
                     </div>
-                    <ChatBar 
-                        text={this.state.userInput}
-                        userInput={this.userInput}
-                        inputReset={this.inputReset}
-                        userInputSubmit={this.userInputSubmit}
-                    />
-                </div>
+                </div>}
 
                 <div>
                     {this.state.userInput &&
@@ -108,15 +126,19 @@ class App extends React.Component {
                     }
                 </div>
 
-                <div>
-                    {(this.state.thirdLink) ?
-                    <div style={chatResponseStyle}>
-                        <DisplayLink link = {this.state.firstLink} />
-                        <DisplayLink link = {this.state.secondLink} />
-                        <DisplayLink link = {this.state.thirdLink} />
-                    </div> : <div style={{fontSize: '0.7em'}}>Waiting for Data</div>
-                    }
-                </div>
+                    {this.state.D4V1D ? <div style={{fontSize: 25}}>I am looking forward to communicating with a human...</div> :
+                    <div>
+                        <div>
+                            {(this.state.thirdLink) ?
+                            <div style={chatResponseStyle}>
+                                <DisplayLink link = {this.state.firstLink} />
+                                <DisplayLink link = {this.state.secondLink} />
+                                <DisplayLink link = {this.state.thirdLink} />
+                            </div> : <div style={{fontSize: '0.7em'}}>Waiting for Data</div>
+                            }
+                        </div>
+                    </div>}
+
             </div>
         )
     }
