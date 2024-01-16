@@ -13,13 +13,12 @@ class App extends React.Component {
             ascii: 0,
             firstLink: {},
             secondLink: {},
-            thirdLink: {},
-
-            D4V1D: false
+            thirdLink: {}
         }
         
         this.userInput = this.userInput.bind(this);
         this.userInputSubmit = this.userInputSubmit.bind(this);
+        this.chat = this.chat.bind(this);
     }
     
 //____________________________________________________________________
@@ -59,6 +58,26 @@ class App extends React.Component {
           });
     }
 
+    chat() {
+        let submission = this.state.userInput;
+        axios.post('/chat', {
+            userText: submission
+          })
+          .then((response) => {
+
+            console.log(response.data);
+            if (response.data > this.state.chatResponseScore) {
+                this.setState({
+                    chatResponse: response.data
+                })
+             }
+
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    }
+
 
 //____________________________________________________________________
 
@@ -86,36 +105,20 @@ class App extends React.Component {
 
         return  (
             <div>
-                {(this.state.D4V1D) ?
                 <div>
                     <div>
-                        <div>
-                            <h1 className="glitch" data-trick="D4V1D" style={{marginBottom: -3}}>D4V1D</h1>
+                        <div style={explanationStyle}>
+                            <Explanation />
                         </div>
-                        <ChatBar 
-                            text={this.state.userInput}
-                            userInput={this.userInput}
-                            inputReset={this.inputReset}
-                            userInputSubmit={this.userInputSubmit}
-                        />
-                     </div> 
-                </div> :
-                <div>
-                    <div>
-                        <div>
-                            <div style={explanationStyle}>
-                                <Explanation />
-                            </div>
-                            <h1 className="glitch" data-trick="MEPHISTO" style={{marginBottom: -3}}>MEPHISTO</h1>
-                        </div>
-                        <ChatBar 
-                            text={this.state.userInput}
-                            userInput={this.userInput}
-                            inputReset={this.inputReset}
-                            userInputSubmit={this.userInputSubmit}
-                        />
+                        <h1 className="glitch" data-trick="MEPHISTO" style={{marginBottom: -3}}>MEPHISTO</h1>
                     </div>
-                </div>}
+                    <ChatBar 
+                        text={this.state.userInput}
+                        userInput={this.userInput}
+                        inputReset={this.inputReset}
+                        userInputSubmit={this.userInputSubmit}
+                    />
+                </div>
 
                 <div>
                     {this.state.userInput &&
@@ -124,6 +127,27 @@ class App extends React.Component {
                             {this.state.ascii}
                         </div>
                     }
+                </div>
+
+                <div>
+                    <button onClick={this.chat}
+                    style = {{
+                                float: 'right',
+                                marginRight: '300px',
+                                color: 'white',
+                                background: 'none',
+                                borderRadius: '0',
+                                letterSpacing: '0.35em',
+                                fontSize: '15px',
+                                webkitTransition: 'background-color 0.3s, box-shadow 0.3s, color 0.3s',
+                                transition: 'background-color 0.3s, box-shadow 0.3s, color 0.3s',
+                                boxShadow: 'inset 0 0 1em rgba(0, 170, 170, 0.5), 0 0 1em rgba(0, 170, 170, 0.5)',
+                                border: 'gold solid 2px',
+                                width: '15em',
+                                backgroundColor: 'gold',
+                                boxShadow: 'inset 0 0 0 rgba(0, 170, 170, 0.5), 0 0 1.5em rgba(0, 170, 170, 0.7)'
+
+                    }}>Chat with Mephisto</button>
                 </div>
 
                     {this.state.D4V1D ? <div style={{fontSize: 25}}>I am looking forward to communicating with a human...</div> :
