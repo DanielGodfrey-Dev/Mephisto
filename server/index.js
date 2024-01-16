@@ -8,20 +8,20 @@ const port = 3001;
 const { graphqlHTTP } = require('express-graphql');
 const { buildSchema } = require('graphql');
 
-const schema = buildSchema(`
-  type Query {
-    friend: String
-  }
-`);
+// const schema = buildSchema(`
+//   type Query {
+//     friend: String
+//   }
+// `);
 
-const friend = { friend: () => 'Hello Shawna' };
+// const friend = { friend: () => 'Hello Shawna' };
 
-//______________________________________________________________
-app.use('/graphql', graphqlHTTP({
-    schema: schema,
-    rootValue: friend,
-    graphiql: true,
-  }));
+// //______________________________________________________________
+// app.use('/graphql', graphqlHTTP({
+//     schema: schema,
+//     rootValue: friend,
+//     graphiql: true,
+//   }));
 
 app.use(express.static(__dirname + '/../dist'));
 app.use(express.json());
