@@ -45,8 +45,6 @@ app.post('/search', (req, res) => {
     let FinalData = [];
 
     https.get(`${url}`, (response) => {
-        console.log('statusCode:', response.statusCode);
-        console.log('headers:', response.headers);
 
         response.on('data', (d) => {
             GoogleData += d;
@@ -56,7 +54,6 @@ app.post('/search', (req, res) => {
             let parsed = JSON.parse(GoogleData);
             for (var i = 0; i < parsed.items.length; i++) {
                 var item = parsed.items[i];
-                console.log(item);
                 FinalData.push(item);
               }
 
@@ -68,4 +65,35 @@ app.post('/search', (req, res) => {
             console.error(e);
         });
     });
+});
+
+app.post('/chat', (req, res) => {
+  let searchTerm = req.body.userText;
+  let API_KEY = GoogleAPI.GoogleAPI;
+  let CONTEXT_KEY = GoogleAPI.ContextKey;
+
+  let url = `https://www.googleapis.com/customsearch/v1?key=${API_KEY}&cx=${CONTEXT_KEY}&q=${searchTerm}`;
+
+  let GoogleData = '';
+  let totalResults = 0;
+
+  https.get(`${url}`, (response) => {
+      console.log('statusCode:', response.statusCode);
+      console.log('headers:', response.headers);
+
+      response.on('data', (d) => {
+          GoogleData += d;
+      });
+
+      response.on('end', function() {
+          let parsed = JSON.parse(GoogleData);
+          totalResults = parsed["searchInformation"]["totalResults"];
+
+          res.send(totalResults);
+          
+      })
+      .on('error', (e) => {
+          console.error(e);
+      });
+  });
 });

@@ -13,7 +13,10 @@ class App extends React.Component {
             ascii: 0,
             firstLink: {},
             secondLink: {},
-            thirdLink: {}
+            thirdLink: {},
+
+            chatResponse: '',
+            chatResponseScore: 0
         }
         
         this.userInput = this.userInput.bind(this);
@@ -37,7 +40,23 @@ class App extends React.Component {
     }
 
     chat() {
-        console.log(this.state.userInput);
+        let submission = this.state.userInput;
+        axios.post('/chat', {
+            userText: submission
+          })
+          .then((response) => {
+
+            console.log(response.data);
+            if (response.data > this.state.chatResponseScore) {
+                this.setState({
+                    chatResponse: response.data
+                })
+             }
+
+          })
+          .catch((error) => {
+            console.log(error);
+          });
     }
 
 
