@@ -15,7 +15,7 @@ class App extends React.Component {
             secondLink: {},
             thirdLink: {},
 
-            D4V1D: true
+            D4V1D: false
         }
         
         this.userInput = this.userInput.bind(this);
