@@ -1,2 +1,2 @@
 # Mephisto
-Chatbot UI with enhanced GraphQL search features
+Cyberpunk style search engine homepage. Advanced chat functionality (homebrew) as well as being able to toggle to ChatGPT!
