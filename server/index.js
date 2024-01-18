@@ -100,15 +100,19 @@ function wordFilter(array) {
       res.on('end', function () {
         const body = Buffer.concat(chunks);
         let parsed = JSON.parse(body);
-        let wordType = parsed["definitions"][0]["partOfSpeech"];
-        console.log(wordType);
-        if (wordType === 'noun') {
-          nounArray.push(word)
-        }
-        else if (wordType === 'verb') {
-          verbArray.push(word);
+        if (parsed["definitions"] && parsed["definitions"][0]) {
+          let partOfSpeech = parsed["definitions"][0]["partOfSpeech"];
+          console.log(partOfSpeech);
+
+          if (partOfSpeech === 'noun') {
+            nounArray.push(word)
+          }
+          else if (partOfSpeech === 'verb') {
+            verbArray.push(word);
+          }
         }
       });
+
     });
     req.end();
 }
@@ -118,7 +122,7 @@ function wordFilter(array) {
 
   setTimeout(() => {
     console.log(nounArray, verbArray);
-  }, 3000);
+  }, 5000);
 
 }
 
@@ -148,7 +152,9 @@ app.post('/chat', (req, res) => {
       response.on('end', function() {
           let parsed = JSON.parse(GoogleData);
           totalResults = parsed["searchInformation"]["totalResults"];
+          let score = Math.floor(totalResults/100000);
 
+          console.log(`the accuracy score for this sentence is: ${score}`)
           res.send(totalResults);
           
       })
